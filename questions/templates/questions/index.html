@@ -1,0 +1,45 @@
+{% extends  'hasker/layouts/layout.html' %}
+{% load url_replace %}
+
+{% block title %} Questions {% endblock %}
+
+{% block left_column %}
+<div class="row">
+    <div class="col">
+        <h1> All Questions </h1>
+    </div>
+
+    <div class="col">
+
+        <ul class="nav nav-tabs mb-3">
+            <li class="nav-item">
+                <a class="nav-link {% if not request.GET.order_by %}active{% endif %}"
+                   href="?{% url_replace order_by='' %}">New</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {% if request.GET.order_by == 'rank' %}active{% endif %}"
+                   href="?{% url_replace order_by='rank' %}">Hot</a>
+            </li>
+        </ul>
+
+    </div>
+
+</div>
+
+
+<div class="row">
+    <div class="col">
+        {% for question in page_obj %}
+        {% include 'questions/include/question_card.html' with question=question %}
+        {% endfor %}
+    </div>
+</div>
+
+<!-- paginator -->
+<div class="row">
+    <div class="col">
+        {% include 'hasker/layouts/paginator.html' %}
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,7 @@
+<div>
+    <img src="{{ question.user.thumbnail_url }}" class="user-avatar-small rounded rounded-lg" />
+    <div>
+        <small><span class="text-info">{{ question.user.username }}</span> asked
+            {{ question.date_pub|timesince }} ago</small>
+    </div>
+</div>

@@ -1,0 +1,20 @@
+{% extends  'layout.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %} Update Profile {% endblock %}
+
+{% block left_column %}
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">Update your profile</h4>
+
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            {{ form|crispy }}
+
+            <button type="submit" class="btn btn-primary btn-block">Update</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

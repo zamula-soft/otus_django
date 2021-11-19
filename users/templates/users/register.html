@@ -1,0 +1,22 @@
+{% extends  'layout_short.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %} Register Account {% endblock %}
+
+{% block column %}
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">Register your account</h4>
+
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <input type="hidden" name="next" value="{{ next }}">
+
+            {{ form|crispy }}
+
+            <button type="submit" class="btn btn-primary btn-block">Register</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

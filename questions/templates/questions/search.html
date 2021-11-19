@@ -1,0 +1,30 @@
+{% extends  'hasker/layouts/layout.html' %}
+{% load url_replace %}
+{% load paginate %}
+
+{% block title %} Search Questions {% endblock %}
+
+{% block left_column %}
+<div class="row">
+    <div class="col">
+        <h1> Search Results </h1>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col">
+        {% for question in page_obj %}
+        {% include 'questions/include/question_card.html' with question=question %}
+        {% endfor %}
+    </div>
+</div>
+
+<!-- paginator -->
+<div class="row">
+    <div class="col">
+        {% paginate %}
+    </div>
+</div>
+
+{% endblock %}

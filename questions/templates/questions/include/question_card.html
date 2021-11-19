@@ -1,0 +1,25 @@
+<div class="row mb-3">
+    <div class="col-1 text-center align-items-center justify-content-center">
+        <span><h5 class="mb-0">{{ question.rank|default:0 }}</h5> <small>votes</small></span>
+        <span><h6 class="mb-0">{{ question.num_answers|default:0 }}</h6> <small>answers</small></span>
+    </div>
+    <div class="col-11">
+        <h3><a href="{% url 'questions:detail' question.pk %}">{{ question.title }}</a></h3>
+        <p>{{ question.content | truncatewords:15 }}</p>
+
+        <!-- tags + author -->
+        <div class="row">
+            <div class="col-4">
+                {% for tag in question.tags.all %}
+                <a href="{% url 'questions:search' %}?t={{ tag.name }}" class="badge badge-info">{{ tag.name }}</a>
+                {% endfor %}
+            </div>
+
+            <div class="col-8 text-right">
+                {% include 'questions/include/user_asked.html' %}
+            </div>
+        </div>
+
+    </div>
+</div>
+<hr class="mb-3"/>

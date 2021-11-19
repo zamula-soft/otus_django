@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
+import os
 
 from pathlib import Path
 
@@ -38,7 +39,12 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'hasker',
-    'polls'
+    'polls',
+    'questions',
+    'users',
+    'votes',
+    'crispy_forms',
+    # 'storages',
 ]
 
 MIDDLEWARE = [
@@ -64,6 +70,9 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+
+                'questions.context_processors.trending',
+                'questions.context_processors.user_votes',
             ],
         },
     },
@@ -125,3 +134,24 @@ STATIC_URL = '/static/'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# Users App
+AUTH_USER_MODEL = 'users.UserProfile'
+LOGIN_URL = '/users/login/'
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
+USER_IMAGE_DIR = 'avatars'
+USER_IMAGE_SIZE = (200, 200)
+USER_IMAGE_PLACEHOLDER = 'users/img/placeholder.png'
+
+ADMIN_DEFAULT_EMAIL = os.getenv('ADMIN_DEFAULT_EMAIL')
+ADMIN_DEFAULT_PASSWORD = os.getenv('ADMIN_DEFAULT_PASSWORD')
+
+# Questions App
+QUESTIONS_PER_PAGE = 20
+ANSWERS_PER_PAGE = 30
+
+# Email
+EMAIL_SUBJECT_PREFIX = '[Hasker]'
+DEFAULT_FROM_EMAIL = 'hasker@hasker.com'
